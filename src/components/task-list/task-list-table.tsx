@@ -32,6 +32,9 @@ export const TaskListTableDefault: React.FC<{
   setSelectedTask: (taskId: string) => void;
   onExpanderClick: (task: Task) => void;
   extraColumns?: ExtraColumn[];
+  nameColumnWidth?: string;
+  fromColumnWidth?: string;
+  toColumnWidth?: string;
 }> = ({
   rowHeight,
   rowWidth,
@@ -41,6 +44,9 @@ export const TaskListTableDefault: React.FC<{
   locale,
   onExpanderClick,
   extraColumns = [],
+  nameColumnWidth,
+  fromColumnWidth,
+  toColumnWidth,
 }) => {
   const toLocaleDateString = useMemo(
     () => toLocaleDateStringFactory(locale),
@@ -72,8 +78,8 @@ export const TaskListTableDefault: React.FC<{
             <div
               className={styles.taskListCell}
               style={{
-                minWidth: rowWidth,
-                maxWidth: rowWidth,
+                minWidth: nameColumnWidth || rowWidth,
+                maxWidth: nameColumnWidth || rowWidth,
               }}
               title={t.name}
             >
@@ -94,8 +100,8 @@ export const TaskListTableDefault: React.FC<{
             <div
               className={styles.taskListCell}
               style={{
-                minWidth: rowWidth,
-                maxWidth: rowWidth,
+                minWidth: fromColumnWidth || rowWidth,
+                maxWidth: fromColumnWidth || rowWidth,
               }}
             >
               &nbsp;{toLocaleDateString(t.start, dateTimeOptions)}
@@ -103,8 +109,8 @@ export const TaskListTableDefault: React.FC<{
             <div
               className={styles.taskListCell}
               style={{
-                minWidth: rowWidth,
-                maxWidth: rowWidth,
+                minWidth: toColumnWidth || rowWidth,
+                maxWidth: toColumnWidth || rowWidth,
               }}
             >
               &nbsp;{toLocaleDateString(t.end, dateTimeOptions)}

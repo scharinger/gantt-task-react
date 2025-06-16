@@ -33,6 +33,9 @@ const ExtraColumnsApp: React.FC = () => {
           tasks={tasks}
           viewMode={view}
           extraColumns={extraColumns}
+          nameColumnWidth="180px"
+          fromColumnWidth="120px"
+          toColumnWidth="120px"
           onDateChange={(task, _children) => {
             console.log("On date change Id:" + task.id);
             setTasks(tasks);

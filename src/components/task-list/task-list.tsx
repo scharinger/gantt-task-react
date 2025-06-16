@@ -18,12 +18,18 @@ export type TaskListProps = {
   setSelectedTask: (task: string) => void;
   onExpanderClick: (task: Task) => void;
   extraColumns?: ExtraColumn[];
+  nameColumnWidth?: string;
+  fromColumnWidth?: string;
+  toColumnWidth?: string;
   TaskListHeader: React.FC<{
     headerHeight: number;
     rowWidth: string;
     fontFamily: string;
     fontSize: string;
     extraColumns?: ExtraColumn[];
+    nameColumnWidth?: string;
+    fromColumnWidth?: string;
+    toColumnWidth?: string;
   }>;
   TaskListTable: React.FC<{
     rowHeight: number;
@@ -36,6 +42,9 @@ export type TaskListProps = {
     setSelectedTask: (taskId: string) => void;
     onExpanderClick: (task: Task) => void;
     extraColumns?: ExtraColumn[];
+    nameColumnWidth?: string;
+    fromColumnWidth?: string;
+    toColumnWidth?: string;
   }>;
 };
 
@@ -55,6 +64,9 @@ export const TaskList: React.FC<TaskListProps> = ({
   taskListRef,
   horizontalContainerClass,
   extraColumns,
+  nameColumnWidth,
+  fromColumnWidth,
+  toColumnWidth,
   TaskListHeader,
   TaskListTable,
 }) => {
@@ -71,6 +83,9 @@ export const TaskList: React.FC<TaskListProps> = ({
     fontSize,
     rowWidth,
     extraColumns,
+    nameColumnWidth,
+    fromColumnWidth,
+    toColumnWidth,
   };
   const selectedTaskId = selectedTask ? selectedTask.id : "";
   const tableProps = {
@@ -84,6 +99,9 @@ export const TaskList: React.FC<TaskListProps> = ({
     setSelectedTask,
     onExpanderClick,
     extraColumns,
+    nameColumnWidth,
+    fromColumnWidth,
+    toColumnWidth,
   };
 
   return (

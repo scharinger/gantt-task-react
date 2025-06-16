@@ -144,6 +144,84 @@ npm start
 
 \*Required
 
+## Extra Columns Support
+
+You can add custom columns to the task list by using the `extraColumns` prop:
+
+```javascript
+import { Gantt, Task, ExtraColumn } from 'gantt-task-react';
+
+// Define extra columns
+const extraColumns: ExtraColumn[] = [
+  {
+    key: "status",
+    title: "Status",
+    width: "100px",
+  },
+  {
+    key: "assignee", 
+    title: "Assignee",
+    width: "120px",
+  },
+  {
+    key: "priority",
+    title: "Priority", 
+    width: "80px",
+    render: (task) => (
+      <span className={`priority-${task.extraColumns?.priority}`}>
+        {task.extraColumns?.priority}
+      </span>
+    ),
+  },
+];
+
+// Add extra data to your tasks
+const tasks: Task[] = [
+  {
+    id: "1",
+    name: "Task 1",
+    start: new Date(),
+    end: new Date(),
+    progress: 50,
+    type: "task",
+    extraColumns: {
+      status: "In Progress",
+      assignee: "John Doe", 
+      priority: "High",
+    },
+  },
+];
+
+<Gantt 
+  tasks={tasks} 
+  extraColumns={extraColumns}
+  nameColumnWidth="200px"
+  fromColumnWidth="130px"
+  toColumnWidth="130px"
+/>
+```
+
+### ExtraColumn Interface
+
+| Parameter Name | Type                                    | Description                                                              |
+| :------------- | :-------------------------------------- | :----------------------------------------------------------------------- |
+| key\*          | string                                  | Unique key for the column, used to access data in task.extraColumns     |
+| title\*        | string                                  | Column header title                                                      |
+| width          | string                                  | Column width (e.g., "100px", "120px"). Defaults to listCellWidth        |
+| render         | `(task: Task) => React.ReactNode`       | Optional custom render function for complex column content               |
+
+### Column Width Configuration
+
+You can customize the width of the default columns:
+
+| Parameter Name    | Type   | Description                                      |
+| :---------------- | :----- | :----------------------------------------------- |
+| nameColumnWidth   | string | Width of the Name column (e.g., "200px")        |
+| fromColumnWidth   | string | Width of the From/Start date column (e.g., "130px") |
+| toColumnWidth     | string | Width of the To/End date column (e.g., "130px")     |
+
+\*Required
+
 ## License
 
 [MIT](https://oss.ninja/mit/jaredpalmer/)
