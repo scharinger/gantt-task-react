@@ -3,6 +3,7 @@ export { ViewMode } from "./types/public-types";
 export type {
   GanttProps,
   Task,
+  ExtraColumn,
   StylingOption,
   DisplayOption,
   EventOption,

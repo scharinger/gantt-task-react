@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import styles from "./task-list-table.module.css";
-import { Task } from "../../types/public-types";
+import { Task, ExtraColumn } from "../../types/public-types";
 
 const localeDateStringCache = {};
 const toLocaleDateStringFactory =
@@ -31,6 +31,7 @@ export const TaskListTableDefault: React.FC<{
   selectedTaskId: string;
   setSelectedTask: (taskId: string) => void;
   onExpanderClick: (task: Task) => void;
+  extraColumns?: ExtraColumn[];
 }> = ({
   rowHeight,
   rowWidth,
@@ -39,6 +40,7 @@ export const TaskListTableDefault: React.FC<{
   fontSize,
   locale,
   onExpanderClick,
+  extraColumns = [],
 }) => {
   const toLocaleDateString = useMemo(
     () => toLocaleDateStringFactory(locale),
@@ -107,6 +109,23 @@ export const TaskListTableDefault: React.FC<{
             >
               &nbsp;{toLocaleDateString(t.end, dateTimeOptions)}
             </div>
+            {/* Render extra column values */}
+            {extraColumns.map((column) => (
+              <div
+                key={column.key}
+                className={styles.taskListCell}
+                style={{
+                  minWidth: column.width || rowWidth,
+                  maxWidth: column.width || rowWidth,
+                }}
+                title={column.render ? undefined : String(t.extraColumns?.[column.key] || "")}
+              >
+                &nbsp;{column.render 
+                  ? column.render(t)
+                  : t.extraColumns?.[column.key] || ""
+                }
+              </div>
+            ))}
           </div>
         );
       })}

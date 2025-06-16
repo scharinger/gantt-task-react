@@ -10,6 +10,14 @@ export enum ViewMode {
   Year = "Year",
 }
 export type TaskType = "task" | "milestone" | "project";
+
+export interface ExtraColumn {
+  key: string;
+  title: string;
+  width?: string;
+  render?: (task: Task) => React.ReactNode;
+}
+
 export interface Task {
   id: string;
   type: TaskType;
@@ -31,6 +39,10 @@ export interface Task {
   dependencies?: string[];
   hideChildren?: boolean;
   displayOrder?: number;
+  /**
+   * Extra column data - key-value pairs for additional columns
+   */
+  extraColumns?: { [key: string]: string | number };
 }
 
 export interface EventOption {
@@ -123,6 +135,7 @@ export interface StylingOption {
     rowWidth: string;
     fontFamily: string;
     fontSize: string;
+    extraColumns?: ExtraColumn[];
   }>;
   TaskListTable?: React.FC<{
     rowHeight: number;
@@ -137,9 +150,14 @@ export interface StylingOption {
      */
     setSelectedTask: (taskId: string) => void;
     onExpanderClick: (task: Task) => void;
+    extraColumns?: ExtraColumn[];
   }>;
 }
 
 export interface GanttProps extends EventOption, DisplayOption, StylingOption {
   tasks: Task[];
+  /**
+   * Extra columns to display in the task list
+   */
+  extraColumns?: ExtraColumn[];
 }

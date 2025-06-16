@@ -1,12 +1,14 @@
 import React from "react";
 import styles from "./task-list-header.module.css";
+import { ExtraColumn } from "../../types/public-types";
 
 export const TaskListHeaderDefault: React.FC<{
   headerHeight: number;
   rowWidth: string;
   fontFamily: string;
   fontSize: string;
-}> = ({ headerHeight, fontFamily, fontSize, rowWidth }) => {
+  extraColumns?: ExtraColumn[];
+}> = ({ headerHeight, fontFamily, fontSize, rowWidth, extraColumns = [] }) => {
   return (
     <div
       className={styles.ganttTable}
@@ -59,6 +61,26 @@ export const TaskListHeaderDefault: React.FC<{
         >
           &nbsp;To
         </div>
+        {/* Render extra column headers */}
+        {extraColumns.map((column) => (
+          <React.Fragment key={column.key}>
+            <div
+              className={styles.ganttTable_HeaderSeparator}
+              style={{
+                height: headerHeight * 0.5,
+                marginTop: headerHeight * 0.25,
+              }}
+            />
+            <div
+              className={styles.ganttTable_HeaderItem}
+              style={{
+                minWidth: column.width || rowWidth,
+              }}
+            >
+              &nbsp;{column.title}
+            </div>
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );
