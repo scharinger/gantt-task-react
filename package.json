@@ -1,6 +1,6 @@
 {
   "name": "@scharinger/gantt-task-react",
-  "version": "0.4.0-beta.0",
+  "version": "0.4.0-beta.2",
   "description": "Interactive Gantt Chart for React with TypeScript and Extra Columns Support. Based on gantt-task-react by MaTeMaTuK.",
   "author": "scharinger <din-email@example.com>",
   "homepage": "https://github.com/scharinger/gantt-task-react",
