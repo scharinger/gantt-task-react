@@ -4,6 +4,7 @@ export type {
   GanttProps,
   Task,
   ExtraColumn,
+  DateFormat,
   StylingOption,
   DisplayOption,
   EventOption,

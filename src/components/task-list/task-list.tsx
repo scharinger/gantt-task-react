@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { BarTask } from "../../types/bar-task";
-import { Task, ExtraColumn } from "../../types/public-types";
+import { Task, ExtraColumn, DateFormat } from "../../types/public-types";
 
 export type TaskListProps = {
   headerHeight: number;
@@ -21,6 +21,7 @@ export type TaskListProps = {
   nameColumnWidth?: string;
   fromColumnWidth?: string;
   toColumnWidth?: string;
+  dateFormat?: DateFormat;
   TaskListHeader: React.FC<{
     headerHeight: number;
     rowWidth: string;
@@ -45,6 +46,7 @@ export type TaskListProps = {
     nameColumnWidth?: string;
     fromColumnWidth?: string;
     toColumnWidth?: string;
+    dateFormat?: DateFormat;
   }>;
 };
 
@@ -67,6 +69,7 @@ export const TaskList: React.FC<TaskListProps> = ({
   nameColumnWidth,
   fromColumnWidth,
   toColumnWidth,
+  dateFormat,
   TaskListHeader,
   TaskListTable,
 }) => {
@@ -102,6 +105,7 @@ export const TaskList: React.FC<TaskListProps> = ({
     nameColumnWidth,
     fromColumnWidth,
     toColumnWidth,
+    dateFormat,
   };
 
   return (

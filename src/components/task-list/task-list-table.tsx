@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import styles from "./task-list-table.module.css";
-import { Task, ExtraColumn } from "../../types/public-types";
+import { Task, ExtraColumn, DateFormat } from "../../types/public-types";
 
 const localeDateStringCache = {};
 const toLocaleDateStringFactory =
@@ -14,6 +14,11 @@ const toLocaleDateStringFactory =
     }
     return lds;
   };
+
+const toISODateString = (date: Date): string => {
+  return date.toISOString().split("T")[0]; // Returns yyyy-MM-dd format
+};
+
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
   weekday: "short",
   year: "numeric",
@@ -35,6 +40,7 @@ export const TaskListTableDefault: React.FC<{
   nameColumnWidth?: string;
   fromColumnWidth?: string;
   toColumnWidth?: string;
+  dateFormat?: DateFormat;
 }> = ({
   rowHeight,
   rowWidth,
@@ -47,11 +53,19 @@ export const TaskListTableDefault: React.FC<{
   nameColumnWidth,
   fromColumnWidth,
   toColumnWidth,
+  dateFormat = "locale",
 }) => {
   const toLocaleDateString = useMemo(
     () => toLocaleDateStringFactory(locale),
     [locale]
   );
+
+  const formatDate = useMemo(() => {
+    if (dateFormat === "iso8601") {
+      return toISODateString;
+    }
+    return (date: Date) => toLocaleDateString(date, dateTimeOptions);
+  }, [dateFormat, toLocaleDateString]);
 
   return (
     <div
@@ -104,7 +118,7 @@ export const TaskListTableDefault: React.FC<{
                 maxWidth: fromColumnWidth || rowWidth,
               }}
             >
-              &nbsp;{toLocaleDateString(t.start, dateTimeOptions)}
+              &nbsp;{formatDate(t.start)}
             </div>
             <div
               className={styles.taskListCell}
@@ -113,7 +127,7 @@ export const TaskListTableDefault: React.FC<{
                 maxWidth: toColumnWidth || rowWidth,
               }}
             >
-              &nbsp;{toLocaleDateString(t.end, dateTimeOptions)}
+              &nbsp;{formatDate(t.end)}
             </div>
             {/* Render extra column values */}
             {extraColumns.map((column) => (
@@ -126,7 +140,7 @@ export const TaskListTableDefault: React.FC<{
                 }}
                 title={column.render ? undefined : String(t.extraColumns?.[column.key] || "")}
               >
-                &nbsp;{column.render 
+                {column.render 
                   ? column.render(t)
                   : t.extraColumns?.[column.key] || ""
                 }

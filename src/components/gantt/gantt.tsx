@@ -62,6 +62,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   nameColumnWidth,
   fromColumnWidth,
   toColumnWidth,
+  dateFormat = "locale",
   onDateChange,
   onProgressChange,
   onDoubleClick,
@@ -454,6 +455,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     nameColumnWidth,
     fromColumnWidth,
     toColumnWidth,
+    dateFormat,
     TaskListHeader,
     TaskListTable,
   };

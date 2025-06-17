@@ -15,7 +15,7 @@ npm install gantt-task-react
 ## How to use it
 
 ```javascript
-import { Gantt, Task, EventOption, StylingOption, ViewMode, DisplayOption } from 'gantt-task-react';
+import { Gantt, Task, ExtraColumn, DateFormat, EventOption, StylingOption, ViewMode, DisplayOption } from 'gantt-task-react';
 import "gantt-task-react/dist/index.css";
 
 let tasks: Task[] = [
@@ -40,6 +40,7 @@ You may handle actions
 <Gantt
   tasks={tasks}
   viewMode={view}
+  dateFormat="iso8601"
   onDateChange={onTaskChange}
   onTaskDelete={onTaskDelete}
   onProgressChange={onProgressChange}
@@ -198,6 +199,7 @@ const tasks: Task[] = [
   nameColumnWidth="200px"
   fromColumnWidth="130px"
   toColumnWidth="130px"
+  dateFormat="iso8601"
 />
 ```
 
@@ -219,6 +221,27 @@ You can customize the width of the default columns:
 | nameColumnWidth   | string | Width of the Name column (e.g., "200px")        |
 | fromColumnWidth   | string | Width of the From/Start date column (e.g., "130px") |
 | toColumnWidth     | string | Width of the To/End date column (e.g., "130px")     |
+
+### Date Format Configuration
+
+You can choose how dates are displayed in the From and To columns:
+
+```javascript
+import { Gantt, DateFormat } from 'gantt-task-react';
+
+<Gantt 
+  tasks={tasks}
+  dateFormat="iso8601"  // Options: "locale" or "iso8601"
+/>
+```
+
+| Parameter Name | Type       | Description                                                          |
+| :------------- | :--------- | :------------------------------------------------------------------- |
+| dateFormat     | DateFormat | Date display format. "locale" uses locale formatting (e.g., "Fri, June 15, 2025"), "iso8601" uses ISO 8601 format (YYYY-MM-DD) |
+
+**DateFormat Options:**
+- `"locale"` (default): Displays dates in locale-specific format (e.g., "Fri, June 15, 2025")
+- `"iso8601"`: Displays dates in ISO 8601 format (e.g., "2025-06-15")
 
 \*Required
 

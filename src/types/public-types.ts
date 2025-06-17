@@ -11,6 +11,8 @@ export enum ViewMode {
 }
 export type TaskType = "task" | "milestone" | "project";
 
+export type DateFormat = "locale" | "iso8601";
+
 export interface ExtraColumn {
   key: string;
   title: string;
@@ -157,6 +159,7 @@ export interface StylingOption {
     nameColumnWidth?: string;
     fromColumnWidth?: string;
     toColumnWidth?: string;
+    dateFormat?: DateFormat;
   }>;
 }
 
@@ -178,4 +181,8 @@ export interface GanttProps extends EventOption, DisplayOption, StylingOption {
    * Width of the To column
    */
   toColumnWidth?: string;
+  /**
+   * Date format for start and end dates. "locale" uses locale formatting, "iso8601" uses yyyy-MM-dd format
+   */
+  dateFormat?: DateFormat;
 }
