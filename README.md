@@ -222,6 +222,12 @@ You can customize the width of the default columns:
 
 \*Required
 
+## Contributing
+
+For development setup and contributing guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+For maintainers: Publishing instructions are in [PUBLISHING.md](PUBLISHING.md).
+
 ## License
 
 [MIT](https://oss.ninja/mit/jaredpalmer/)
